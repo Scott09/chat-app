@@ -10,18 +10,23 @@ const io = socketio(server);
 
 app.use(express.static('public'));
 
-let count = 0;
+// let count = 0;
 
-io.on('connection', (socket) => {
-  console.log('new websocket connection')
+// io.on('connection', (socket) => {
+//   console.log('new websocket connection')
   
-  socket.emit('countUpdated', count)
+//   socket.emit('countUpdated', count)
 
-  socket.on('increment', () => {
-    count++;
-    io.emit('countUpdated', count);
-  })
-});
+//   socket.on('increment', () => {
+//     count++;
+//     io.emit('countUpdated', count);
+//   })
+// });
+io.on('connection', () => {
+  console.log('New Websocket Connection');
+})
+
+
 
 
 server.listen(port, () => {
