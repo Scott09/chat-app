@@ -22,10 +22,16 @@ app.use(express.static('public'));
 //     io.emit('countUpdated', count);
 //   })
 // });
-io.on('connection', () => {
-  console.log('New Websocket Connection');
-})
 
+
+io.on('connection', (socket) => {
+  console.log('New Websocket Connection');
+  io.emit('message', "Welcome!");
+
+  socket.on('sendMessage', (message) => {
+    io.emit('message', message);
+  })
+})
 
 
 

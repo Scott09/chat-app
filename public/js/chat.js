@@ -9,3 +9,13 @@ const socket = io();
 //   console.log('Clicked');
 //   socket.emit('increment');
 // });
+
+socket.on('message', (message) => {
+  console.log(message);
+})
+
+document.querySelector('#message-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const message = document.querySelector('input').value;
+  socket.emit('sendMessage', message);
+});
