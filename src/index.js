@@ -10,8 +10,12 @@ const io = socketio(server);
 
 app.use(express.static('public'));
 
-io.on('connection', () => {
+let count = 0;
+
+io.on('connection', (socket) => {
   console.log('new websocket connection')
+  
+  socket.emit('countUpdated', count)
 });
 
 
