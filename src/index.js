@@ -26,11 +26,17 @@ app.use(express.static('public'));
 
 io.on('connection', (socket) => {
   console.log('New Websocket Connection');
+
   io.emit('message', "Welcome!");
+
   socket.broadcast.emit('message', "A new user has joined")
 
   socket.on('sendMessage', (message) => {
     io.emit('message', message);
+  })
+
+  socket.on('disconnect', () => {
+    io.emit('userDisconnect', "A user has disconnected");
   })
 })
 

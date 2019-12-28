@@ -19,3 +19,7 @@ document.querySelector('#message-form').addEventListener('submit', (event) => {
   const message = event.target.elements.message.value;
   socket.emit('sendMessage', message);
 });
+
+socket.on('userDisconnect', (message) => {
+  console.log(message);
+})
