@@ -16,6 +16,11 @@ io.on('connection', (socket) => {
   console.log('new websocket connection')
   
   socket.emit('countUpdated', count)
+
+  socket.on('increment', () => {
+    count++;
+    socket.emit('countUpdated', count);
+  })
 });
 
 
