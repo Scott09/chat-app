@@ -10,19 +10,6 @@ const io = socketio(server);
 
 app.use(express.static('public'));
 
-// let count = 0;
-
-// io.on('connection', (socket) => {
-//   console.log('new websocket connection')
-  
-//   socket.emit('countUpdated', count)
-
-//   socket.on('increment', () => {
-//     count++;
-//     io.emit('countUpdated', count);
-//   })
-// });
-
 
 io.on('connection', (socket) => {
   console.log('New Websocket Connection');
@@ -36,9 +23,14 @@ io.on('connection', (socket) => {
   })
 
   socket.on('disconnect', () => {
-    io.emit('userDisconnect', "A user has disconnected");
+    io.emit('message', "A user has disconnected");
   })
-})
+
+  socket.on('sendLocation', ({ latitude, longitude }) => {
+    io.emit('message', `https://google.com/maps?q=${latitude},${longitude}`)
+  })
+
+});
 
 
 
